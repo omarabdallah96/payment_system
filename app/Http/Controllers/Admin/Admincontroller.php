@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use DataTables;
+use Hamcrest\Type\IsNumeric;
 
 class Admincontroller extends Controller
 {
@@ -22,7 +23,8 @@ class Admincontroller extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $editroute = "/admin/edit/{$row->id}";
+
+                    $editroute = route('admin.users.edit', ['id' => $row->id]);
                     $delete = 'Delete(' . $row->id . ')';
 
                     $actionBtn = '<a href=' . $editroute . ' class="edit btn btn-success btn-sm">Edit</a> <button class="edit btn btn-danger btn-sm" onclick=' . $delete . '>Delete</button>';
@@ -75,7 +77,20 @@ class Admincontroller extends Controller
      */
     public function edit($id)
     {
-        //
+        //check if id is number
+
+        if (!is_numeric($id) || $id < 1) {
+            return redirect()->to(route('admin.users.index'))->with('error', 'user not found');
+        }
+        $user = User::find($id);
+        //check user exists
+
+        if (empty($user)) {
+            return redirect()->to(route('admin.users.index'))->with('error', 'user not found');
+        }
+
+
+        return view('admin.users.edit',compact('user'));
     }
 
     /**
@@ -88,6 +103,7 @@ class Admincontroller extends Controller
     public function update(Request $request, $id)
     {
         //
+        return $request;
     }
 
     /**

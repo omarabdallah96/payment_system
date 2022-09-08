@@ -27,11 +27,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['IsAdmin'], 'prefix' => 'admin'], function () {
         Route::get('/users', [App\Http\Controllers\Admin\Admincontroller::class, 'index'])->name('admin.users.index');
+        Route::get('/users/edit/{id}', [App\Http\Controllers\Admin\Admincontroller::class, 'edit'])->name('admin.users.edit');
+        Route::post('/users/update/{id}', [App\Http\Controllers\Admin\Admincontroller::class, 'update'])->name('admin.users.update');
     });
 
     //user Routes;
     Route::group(['middleware' => ['IsUser'], 'prefix' => 'user'], function () {
-        Route::get('/test', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::get('/proudcts', [App\Http\Controllers\ProductController::class, 'index'])->name('proudcts.index');
     });
 });
 

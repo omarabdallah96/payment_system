@@ -17,6 +17,13 @@
 
 
 <div class="container mt-3">
+    @if(Session('error'))
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h6 class="alert-heading">{{ Session('error') }}</h6>
+    </div>
+
+    @endif
     <table class="table table-bordered data-table">
         <thead>
             <tr>

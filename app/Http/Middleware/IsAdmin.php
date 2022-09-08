@@ -16,6 +16,11 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        //if authenticated user group == 1
+        if ($request->user()->group == 2) {
+
+            return $next($request);
+        }
+        return redirect('/');
     }
 }

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Test User',
                 'email' => 'user@users.com',
                 'password' => Hash::make('password'),
+                'phone' => '1234567890',
             ]
         );
         User::create(
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
                 'password' => Hash::make('password'),
+                'phone' => '123-456-7890',
                 'group' => 2,
             ]
         );

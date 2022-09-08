@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('active')->default(true);
+            $table->string('phone')->nullable();
             $table->integer('group')->default(1);
             //
 
